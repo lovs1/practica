@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promoción del Ejercicio Escolar y Calculadora de Calorías</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('deportivo.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        header {
+            background-color: rgba(0, 77, 153, 0.8);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .section h2 {
+            color: #004d99;
+        }
+
+        .calculator {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .calculator input, .calculator select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .calculator button {
+            background-color: #004d99;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .calculator button:hover {
+            background-color: #003366;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .infographic {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .infographic img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>¡Promueve el Ejercicio en la Escuela!</h1>
+    <p>La actividad física es esencial para tu salud y bienestar. ¡Empieza hoy mismo!</p>
+</header>
+
+<div class="container">
+    <section class="section">
+        <h2>Beneficios del Ejercicio Escolar</h2>
+        <p>El ejercicio regular en la escuela mejora la concentración, reduce el estrés, fortalece el sistema inmunológico y mejora el estado de ánimo de los estudiantes. ¡Hacer ejercicio no solo es divertido, sino que también es fundamental para un aprendizaje efectivo!</p>
+    </section>
+
+    <section class="section calculator">
+        <h2>Calculadora de Calorías</h2>
+        <p>Ingresa tus datos y elige tu objetivo para calcular las calorías que debes consumir diariamente.</p>
+
+        <form id="calorie-form">
+            <label for="age">Edad:</label>
+            <input type="number" id="age" required>
+            
+            <label for="height">Altura (en cm):</label>
+            <input type="number" id="height" required>
+            
+            <label for="weight">Peso (en kg):</label>
+            <input type="number" id="weight" required>
+            
+            <label for="goal">Objetivo:</label>
+            <select id="goal">
+                <option value="maintain">Mantener peso</option>
+                <option value="lose">Perder peso</option>
+                <option value="gain">Ganar músculo</option>
+            </select>
+            
+            <button type="button" onclick="calculateCalories()">Calcular Calorías</button>
+        </form>
+
+        <h3 id="calorie-result"></h3>
+    </section>
+
+    <section class="section infographic">
+        <h2>¿Y si hacemos ejercicio?</h2>
+        <p>Conoce más sobre los beneficios del ejercicio y cómo empezar de manera sencilla.</p>
+        <img src="infografia.png" alt="Infografía sobre los beneficios del ejercicio">
+    </section>
+</div>
+
+<footer>
+    <p>&copy; 2024 Promoción del Ejercicio Escolar. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+    function calculateCalories() {
+        const age = parseInt(document.getElementById('age').value);
+        const height = parseInt(document.getElementById('height').value);
+        const weight = parseInt(document.getElementById('weight').value);
+        const goal = document.getElementById('goal').value;
+
+        if (!age || !height || !weight) {
+            alert('Por favor, completa todos los campos.');
+            return;
+        }
+
+        let bmr;
+
+        if (age && height && weight) {
+            bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+        }
+
+        let calories;
+
+        switch (goal) {
+            case 'maintain':
+                calories = bmr * 1.55;
+                break;
+            case 'lose':
+                calories = bmr * 1.55 - 500;
+                break;
+            case 'gain':
+                calories = bmr * 1.55 + 500;
+                break;
+            default:
+                calories = bmr * 1.55;
+        }
+
+        document.getElementById('calorie-result').innerText = Para ${goal === 'maintain' ? 'mantener' : goal === 'lose' ? 'perder' : 'ganar'} peso, debes consumir aproximadamente ${Math.round(calories)} calorías al día.;
+    }
+</script>
+
+</body>
+</html>
